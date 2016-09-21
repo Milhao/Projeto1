@@ -4,9 +4,9 @@ import pybrain
 inputFile = open("seeds.txt","r")
 
 dataList = []
-vector = []
 
 for line in inputFile:
+	vector = []
 	data = line.split()
 	i = 0
 	while(i<8):
