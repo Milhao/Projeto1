@@ -3,10 +3,15 @@ import pybrain
 
 inputFile = open("seeds.txt","r")
 
-dataList=[]
+dataList = []
+vector = []
 
 for line in inputFile:
-	data = line.strip()
-	dataList.append(data.split('\t'))
+	data = line.split()
+	i = 0
+	while(i<8):
+		vector.append(float(data[i]))
+		i += 1
+	dataList.append(vector)
 
-#print dataList
+print dataList[0][0:7]

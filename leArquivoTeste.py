@@ -6,10 +6,15 @@ inputFile.readline()
 inputFile.readline()
 inputFile.readline()
 
-dataList=[]
+dataList = []
+vector = []
 
 for line in inputFile:
-	data = line.strip()
-	dataList.append(data.split(' '))
+	data = line.split()
+	i = 0
+	while(i<8):
+		vector.append(float(data[i]))
+		i += 1
+	dataList.append(vector)
 
 #print dataList
