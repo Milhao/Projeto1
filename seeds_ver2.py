@@ -9,12 +9,16 @@ from pybrain.structure import TanhLayer
 
 inputFile = open("seeds.txt","r")
 ds = SupervisedDataSet(7,1)
+traindata = SupervisedDataSet(7,1)
+testdata = SupervisedDataSet(7,1)
+
 trainSet = ClassificationDataSet(7, nb_classes=3, class_labels = ["one", "two", "three"])
 testSet = ClassificationDataSet(7, nb_classes=3)
 k = 0
 size = 70
-porcDivision = 0.25
+porcDivTest = 0.25
 category = 0;
+
 
 
 for line in inputFile.readlines():
@@ -24,20 +28,34 @@ for line in inputFile.readlines():
     ds.addSample(indata,outdata)
     k +=1
     if (k == size):
-		testdata, traindata = ds.splitWithProportion( porcDivision )    	
-		ds.clear() 	
-		k = 0
+		i=0 
+		while(i<int(porcDivTest*size)):
+			x = ds['input'][i] 
+			y = ds['target'][i]
+			testdata.addSample(x,y)
+			i+=1
+
+		while(i<size):
+			x = ds['input'][i] 
+			y = ds['target'][i]
+			traindata.addSample(x,y)
+			i+=1
+		
 		for inp,targ in testdata:
 			testSet.appendLinked(inp,targ-1)
 		for inp,targ in traindata:
 			trainSet.appendLinked(inp,targ-1)
-
+		testdata.clear()
+		traindata.clear() 	
+		ds.clear()
+		k = 0
+		
 #print "**************************************"
-#print "Number of training patterns: ",len(testSet)
-#print "Input and output dimensions: ", testSet.indim, testSet.outdim
+print "Number of training patterns: ",len(testSet)
+print "Input and output dimensions: ", testSet.indim, testSet.outdim
 #print testSet	
-#print "Number of training patterns: ",len(trainSet)	
-#print "Input and output dimensions: ", trainSet.indim, trainSet.outdim
+print "Number of training patterns: ",len(trainSet)	
+print "Input and output dimensions: ", trainSet.indim, trainSet.outdim
 #print trainSet
 #print trainSet['input'][90], trainSet['target'][90]
 
@@ -51,24 +69,24 @@ for line in inputFile.readlines():
 
 trainSet._convertToOneOfMany(bounds=[0, 1])
 testSet._convertToOneOfMany(bounds=[0, 1])
+
 #print(trainSet.getField('target'))
 #print "----------------------"
 #print(testSet.getField('target'))
 
 
 
-net = buildNetwork(7,12, 12,3, hiddenclass = TanhLayer, outclass=SoftmaxLayer)
-trainer = BackpropTrainer(net, dataset=trainSet, verbose=True,momentum=0.5, learningrate=0.01) 
-trainer.trainUntilConvergence()
-
+net = buildNetwork(trainSet.indim,13,trainSet.outdim, recurrent=True)
+trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=0.79,verbose=True)
+trainer.trainOnDataset(trainSet,700)
 out = net.activateOnDataset(testSet)
+#print(out)
 out = out.argmax(axis=1) 
 print(out)
 
-#net = buildNetwork(trainSet.indim,13,trainSet.outdim,recurrent=True)
-#trainer = BackpropTrainer(net,learningrate=0.01,momentum=0.5,verbose=True)
-#trainer.trainOnDataset(trainSet,100)
+
+
+
 
 #print net.activate(trainSet['input'][90])
-
 #trainer.testOnData(trainSet['input'][90],verbose=True)

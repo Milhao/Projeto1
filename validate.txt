@@ -1,0 +1,33 @@
+net = buildNetwork(trainSet.indim,13,trainSet.outdim,recurrent=True)
+trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=0.69,verbose=True)
+trainer.trainOnDataset(trainSet,800)
+0 0 1 0 0 2 2 0 0 0 0 0 0 2 2 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+
+net = buildNetwork(trainSet.indim,12,12,trainSet.outdim, recurrent=True)
+trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=0.69,verbose=True)
+trainer.trainOnDataset(trainSet,800)
+0 0 0 0 2 0 0 0 0 0 2 0 0 0 0 0 2 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 2 2
+
+
+net = buildNetwork(trainSet.indim,13,trainSet.outdim, recurrent=True)
+trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=0.69,verbose=True)
+trainer.trainOnDataset(trainSet,7000)
+
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 0 2 2 2 2 2
+
+net = buildNetwork(trainSet.indim,11,8,trainSet.outdim, recurrent=True)
+trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=0.69,verbose=True)
+trainer.trainOnDataset(trainSet,600)
+0 0 0 0 0 0 0 2 0 0 0 0 0 0 2 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 2 0 2 2 2 2 2 2 2 2 2 0 2 2 2 2 2
+
+
+
+
+========================================================================
+/*with new algorithm of division*/
+0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 2 2
+
+0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+net = buildNetwork(trainSet.indim,13,trainSet.outdim, recurrent=True)
+trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=0.79,verbose=True)
+trainer.trainOnDataset(trainSet,700)

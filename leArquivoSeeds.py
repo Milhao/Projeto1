@@ -29,6 +29,6 @@ for data in dataList:				#adiciona os dados no data set
 
 trainer = BackpropTrainer(net, dataSet)		#treina a rede
 
-#print Trainer.train()
+#print trainer.train()
 
 #print net.activate(dataList[15][0:7])
