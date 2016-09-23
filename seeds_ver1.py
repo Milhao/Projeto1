@@ -14,11 +14,11 @@ ds = SupervisedDataSet(7,1)
 trainSet = ClassificationDataSet(7, nb_classes=3, class_labels = ["one", "two", "three"])
 testSet = ClassificationDataSet(7, nb_classes=3)
 
-PorcDivTest = 0.10
+PorcDivTest = 0.25
 Ciclos = 700
-Momentum = 0.79;
+Momentum = 0.69;
 camada1 = 13
-camada2 = 7
+camada2 = 0
 
 k = 0
 size = 70
@@ -61,20 +61,41 @@ testSet._convertToOneOfMany(bounds=[0, 1])
 #print "----------------------"
 #print(testSet.getField('target'))
 
-
 if(camada2==0):
 	net = buildNetwork(trainSet.indim,camada1,trainSet.outdim, recurrent=True)
 else :
 	net = buildNetwork(trainSet.indim,camada1,camada2,trainSet.outdim, recurrent=True)
-trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=Momentum)
+trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=Momentum, verbose=True)
 trainer.trainOnDataset(trainSet,Ciclos)
 
+
+
 out = net.activateOnDataset(testSet)
-print(out)
+#print(out)
 out = out.argmax(axis=1) 
-print(out)
+print out
 
+acerto = total = i = 0
+for data in testSet:
+	if data[1][0] == 1 and out[i] == 0:
+		acerto += 1
+		total += 1
+	elif data[1][1] == 1 and out[i] == 1:
+		acerto += 1
+		total += 1
+	elif data[1][2] == 1 and out[i] == 2:
+		acerto += 1
+		total += 1
+	else:
+		total += 1
+	i += 1
+acuracia = float(float(acerto)/float(total))
 
+print repr(PorcDivTest)+" "+repr(Ciclos)+" "+repr(Momentum)+" "+repr(camada1)+" "+repr(camada2)+" "+repr(acuracia)
+
+outFile = open("outputFile.txt","a")
+outFile.write(repr(PorcDivTest)+" "+repr(Ciclos)+" "+repr(Momentum)+" "+repr(camada1)+" "+repr(camada2)+" "+repr(acuracia)+"\n")
+outFile.close()
 
 #trainer.trainOnDataset(trainSet,100)
 
