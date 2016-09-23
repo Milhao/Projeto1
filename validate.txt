@@ -1,33 +1,30 @@
-net = buildNetwork(trainSet.indim,13,trainSet.outdim,recurrent=True)
-trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=0.69,verbose=True)
-trainer.trainOnDataset(trainSet,800)
+PorcDivTest = 0.25
+Ciclos = 800
+Momentum = 0.69;
+camada1 = 13
+camada2 = 0
+
 0 0 1 0 0 2 2 0 0 0 0 0 0 2 2 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
 
-net = buildNetwork(trainSet.indim,12,12,trainSet.outdim, recurrent=True)
-trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=0.69,verbose=True)
-trainer.trainOnDataset(trainSet,800)
+PorcDivTest = 0.25
+Ciclos = 800
+Momentum = 0.69;
+camada1 = 12
+camada2 = 12
 0 0 0 0 2 0 0 0 0 0 2 0 0 0 0 0 2 1 1 1 1 1 1 1 1 1 1 1 0 1 1 1 0 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 2 2
 
-
-net = buildNetwork(trainSet.indim,13,trainSet.outdim, recurrent=True)
-trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=0.69,verbose=True)
-trainer.trainOnDataset(trainSet,7000)
+PorcDivTest = 0.25
+Ciclos = 700
+Momentum = 0.69;
+camada1 = 13
+camada2 = 0
 
 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 0 2 2 2 2 2
 
-net = buildNetwork(trainSet.indim,11,8,trainSet.outdim, recurrent=True)
-trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=0.69,verbose=True)
-trainer.trainOnDataset(trainSet,600)
-0 0 0 0 0 0 0 2 0 0 0 0 0 0 2 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 2 0 2 2 2 2 2 2 2 2 2 0 2 2 2 2 2
 
-
-
-
-========================================================================
-/*with new algorithm of division*/
-0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 0 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 0 2 2
-
-0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
-net = buildNetwork(trainSet.indim,13,trainSet.outdim, recurrent=True)
-trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=0.79,verbose=True)
-trainer.trainOnDataset(trainSet,700)
+PorcDivTest = 0.10
+Ciclos = 700
+Momentum = 0.79;
+camada1 = 13
+camada2 = 0
+0 0 0 0 0 0 0 1 1 1 1 1 1 0 2 2 2 2 2 2 2

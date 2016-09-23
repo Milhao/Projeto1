@@ -1,4 +1,4 @@
-import sys
+
 import pybrain
 from pybrain.tools.shortcuts import buildNetwork
 from pybrain.datasets import SupervisedDataSet
@@ -10,6 +10,9 @@ inputFile = open("teste1.txt","r")
 inputs = 14
 outputs =1
 porcDivision = 0.25
+Ciclos = 300
+Momentum = 0.59  
+
 ds = SupervisedDataSet(inputs,outputs)
 
 

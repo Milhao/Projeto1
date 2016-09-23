@@ -8,15 +8,20 @@ from pybrain.structure.modules   import SoftmaxLayer
 from pybrain.structure import TanhLayer
 
 inputFile = open("seeds.txt","r")
+
 ds = SupervisedDataSet(7,1)
+
 trainSet = ClassificationDataSet(7, nb_classes=3, class_labels = ["one", "two", "three"])
 testSet = ClassificationDataSet(7, nb_classes=3)
+
+PorcDivTest = 0.10
+Ciclos = 700
+Momentum = 0.79;
+camada1 = 13
+camada2 = 7
+
 k = 0
 size = 70
-porcDivTest = 0.10
-category = 0;
-
-
 for line in inputFile.readlines():
     data = [float(x) for x in line.strip().split() if x != '']
     indata =  tuple(data[:7])
@@ -24,7 +29,7 @@ for line in inputFile.readlines():
     ds.addSample(indata,outdata)
     k +=1
     if (k == size):
-		testdata, traindata = ds.splitWithProportion( porcDivTest )    	
+		testdata, traindata = ds.splitWithProportion( PorcDivTest )    	
 		ds.clear() 	
 		k = 0
 		for inp,targ in testdata:
@@ -57,11 +62,12 @@ testSet._convertToOneOfMany(bounds=[0, 1])
 #print(testSet.getField('target'))
 
 
-
-
-net = buildNetwork(trainSet.indim,13,trainSet.outdim, recurrent=True)
-trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=0.79,verbose=True)
-trainer.trainOnDataset(trainSet,700)
+if(camada2==0):
+	net = buildNetwork(trainSet.indim,camada1,trainSet.outdim, recurrent=True)
+else :
+	net = buildNetwork(trainSet.indim,camada1,camada2,trainSet.outdim, recurrent=True)
+trainer = BackpropTrainer(net,dataset = trainSet,learningrate=0.001,momentum=Momentum)
+trainer.trainOnDataset(trainSet,Ciclos)
 
 out = net.activateOnDataset(testSet)
 print(out)
